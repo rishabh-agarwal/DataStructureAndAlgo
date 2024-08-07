@@ -6,19 +6,26 @@ package leetcode;
 public class CountTheNumberOfVowelInRange {
     public int vowelStrings(String[] words, int left, int right) {
         int count = 0;
+
+        //Loop from left index to right index
         for(int i = left;i <= right;i++)
         {
-            String s = words[i];
-            int a = s.length() - 1;
-            if((s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u') && (s.charAt(a) == 'a' || s.charAt(a) == 'e' || s.charAt(a) == 'i' || s.charAt(a) == 'o' || s.charAt(a) == 'u'))
+            String s = words[i]; //grabing one word from array
+            char firstChar = s.charAt(0); //grabbing first character of the index
+            char lastChar = s.charAt(s.length()-1); ////grabbing last character of the index
+
+            if(isVowel(firstChar) && isVowel(lastChar))
             {
                 count++;
             }
         }
         return count;
     }
-}
 
-// loop will start from left -> right (increment by one)
-// get the first and last character and check vowel
-// if vowel increase the count and return result
+    public boolean isVowel(char c){
+        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c== 'u')
+            return true;
+        else
+            return false;
+    }
+}
