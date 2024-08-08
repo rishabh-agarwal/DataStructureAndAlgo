@@ -21,6 +21,20 @@ public class NumPairsDivisibleBy60 {
     }
 
     public static void main(String[] args) {
-        numPairsDivisibleBy60(new int[]{30,20,150,100,40});
+        numPairsDivisibleBy60(new int[]{60,60,60});
     }
 }
+
+// Brute Force Approach -> using 2 For - Loops -> TLE
+// Time: O(N^2) & Space: O(1)
+/*public int numPairsDivisibleBy60(int[] time) {
+
+    int count = 0;
+    for(int i = 0; i < time.length; i++){
+        for(int j = i+1; j < time.length; j++) {
+            if((time[i] + time[j]) % 60 == 0)
+                count++;
+        }
+    }
+    return count;
+}*/
