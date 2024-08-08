@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+/**
+ * Leetcode: 1229
+ */
+
 public class MeetingScheduler {
-    public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+    public static List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
 
         PriorityQueue<int[]> pq1 = new PriorityQueue<>((a,b)->(Integer.compare(a[0],b[0])));
         PriorityQueue<int[]> pq2 = new PriorityQueue<>((a,b)->(Integer.compare(a[0],b[0])));
@@ -33,5 +37,9 @@ public class MeetingScheduler {
                 pq2.poll();
         }
         return new ArrayList<>();
+    }
+
+    public static void main(String[] args) {
+        minAvailableDuration(new int[][]{{10,50}, {60,120}, {140, 210}}, new int[][]{{0,15},{60,70}}, 8);
     }
 }
