@@ -7,27 +7,30 @@ import java.util.Arrays;
  */
 public class MaximumSumAnyPermutation {
     public static int maxSumRangeQuery(int[] nums, int[][] requests) {
-        int mod = 1000000007;
-        int[] overlap = new int[nums.length];
+        int MOD = 1000000007;
+        int n = nums.length;
+        int[] freq = new int[n];
 
-        for (int[] range : requests) {
-            overlap[range[0]]++;
-            if (range[1]+1 < nums.length)
-                overlap[range[1]+1]--;
+        // Process each request to build the freq array
+        for (int[] request : requests) {
+            int start = request[0];
+            int end = request[1];
+            for(int i=start; i<=end; i++){
+                freq[i]++;
+            }
         }
 
-        for (int i=1; i<overlap.length; i++)
-            overlap[i] += overlap[i-1];
-
+        // Sort the nums array and freq array
         Arrays.sort(nums);
-        Arrays.sort(overlap);
+        Arrays.sort(freq);
 
-        long sum = 0;
-        int idx = nums.length - 1;
-        for (int i= overlap.length -1; i>=0; i--) {
-            sum = sum % mod + ((long) overlap[i] * nums[idx--]) % mod;
+        // Calculate the maximum sum by pairing largest elements with highest frequencies
+        long maxSum = 0;
+        for (int i = 0; i < n; i++) {
+            maxSum += ((long) nums[i] * freq[i]) % MOD;
         }
-        return (int) (sum + mod) % mod;
+
+        return (int) maxSum;
     }
 
     public static void main(String[] args) {
