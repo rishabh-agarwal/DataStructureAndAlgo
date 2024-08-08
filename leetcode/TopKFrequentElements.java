@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * Leetcode: 347
+ */
 public class TopKFrequentElements {
     public static int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -31,6 +34,6 @@ public class TopKFrequentElements {
     }
 
     public static void main(String[] args) {
-        topKFrequent(new int[]{1,1,1,1,1,1,1,2,2,2,2,2,3}, 2);
+        topKFrequent(new int[]{1,1,1,2,2,2,3}, 2);
     }
 }
