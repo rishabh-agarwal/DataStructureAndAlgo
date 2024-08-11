@@ -1,4 +1,4 @@
-# Data Structure and Alogrithm - Leetcode Practice
+# Data Structure and Alogrithm
 
 <img src="https://github.com/rishabh-agarwal/Leetcode-Practice/blob/master/images/leetCode.jpeg" width="148">
 
