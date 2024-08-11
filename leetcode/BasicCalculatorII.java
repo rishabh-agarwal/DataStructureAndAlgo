@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.Stack;
 
-class Solution {
+class BasicCalculatorII {
     public static int calculate(String s)
     {
         if(s=="")
