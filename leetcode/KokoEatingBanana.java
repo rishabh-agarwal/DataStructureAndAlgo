@@ -1,5 +1,8 @@
 package leetcode;
 
+/**
+ * Leetcode: 875
+ */
 public class KokoEatingBanana {
     public static int minEatingSpeed(int[] piles, int h) {
         int speed = 1;
