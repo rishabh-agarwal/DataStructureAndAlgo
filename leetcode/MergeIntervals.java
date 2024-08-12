@@ -7,23 +7,17 @@ import java.util.*;
  */
 public class MergeIntervals {
     public static int[][] merge(int[][] intervals) {
-        // Sort the intervals by their start time
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
         List<int[]> merged = new ArrayList<>();
         int[] prev = intervals[0];
         for(int i=1; i<intervals.length; i++){
             int[] curr = intervals[i];
-            int prevEnd = prev[1];
-            int currStart = curr[0];
-            int currEnd = curr[1];
-
-            if(prevEnd >= currStart){
-                prev[1] = Math.max(prevEnd, currEnd);
+            if(prev[1] >= curr[0]){
+                prev[1] = Math.max(prev[1], curr[1]);
             }else{
                 merged.add(prev);
                 prev = curr;
             }
-
         }
         merged.add(prev);
         return merged.toArray(new int[merged.size()][]);
