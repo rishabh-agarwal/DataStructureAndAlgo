@@ -2,6 +2,9 @@ package leetcode;
 
 import java.util.Arrays;
 
+/**
+ * Leetcode: 2005
+ */
 public class PlatesBetweenCandles {
     public static int[] platesBetweenCandles(String s, int[][] queries) {
         int n = queries.length;
