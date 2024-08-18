@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Leetcode 207
  */
-public class CourseScheduleI {
+public class CourseScheduledfs {
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
         HashMap<Integer, List<Integer>> preMap = new HashMap<>();
         Set<Integer> visiting = new HashSet<>();
