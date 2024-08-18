@@ -7,56 +7,49 @@ import java.util.*;
  */
 public class CourseScheduleI {
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
-        // Create an adjacency list to represent the graph
-        List<List<Integer>> adjList = new ArrayList<>();
-        for (int i = 0; i < numCourses; i++) {
-            adjList.add(new ArrayList<>());
+        HashMap<Integer, List<Integer>> preMap = new HashMap<>();
+        Set<Integer> visiting = new HashSet<>();
+
+        for(int i=0; i<numCourses; i++){
+            preMap.put(i, new ArrayList<>());
         }
 
-        // Array to keep track of in-degrees (number of prerequisites for each course)
-        int[] inDegree = new int[numCourses];
-
-        // Fill the adjacency list and in-degree array
-        for (int[] pair : prerequisites) {
-            adjList.get(pair[1]).add(pair[0]);
-            inDegree[pair[0]]++;
+        for(int[] pair: prerequisites){
+            preMap.get(pair[0]).add(pair[1]);
         }
 
-        // Queue for courses with no prerequisites
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < numCourses; i++) {
-            if (inDegree[i] == 0) {
-                queue.add(i);
-            }
+        for(int c=0; c<numCourses; c++){
+            if(!dfs(c, preMap, visiting)) return false;
+        }
+        return true;
+    }
+
+    private static boolean dfs(int crs, HashMap<Integer, List<Integer>> preMap, Set<Integer> visiting){
+        if(visiting.contains(crs)) //if duplicate set is detected
+            return false;
+
+        if(preMap.get(crs).isEmpty()){
+            return true;
         }
 
-        // Process the courses
-        int completedCourses = 0;
-        while (!queue.isEmpty()) {
-            int course = queue.poll();
-            completedCourses++;
-
-            // Reduce the in-degree of neighboring courses
-            for (int neighbor : adjList.get(course)) {
-                inDegree[neighbor]--;
-                if (inDegree[neighbor] == 0) {
-                    queue.add(neighbor);
-                }
-            }
+        visiting.add(crs);
+        for(int pre: preMap.get(crs)){
+            if(!dfs(pre, preMap, visiting)) return false;
         }
-
-        // If all courses are completed, there is no cycle
-        return completedCourses == numCourses;
+        visiting.remove(crs);
+        preMap.put(crs, new ArrayList<>());
+        return true;
     }
 
     public static void main(String[] args) {
-        int numCourses = 4;
-        int[][] prerequisites = {{2, 0}, {3, 1}};
-        System.out.println(canFinish(numCourses, prerequisites)); // Output: true
 
         int numCourses1 = 5;
         int[][] prerequisites1 = {{1, 0}, {2, 1}, {3, 2}, {4, 3}};
         System.out.println(canFinish(numCourses1, prerequisites1)); // Output: true
+
+        int numCourses = 4;
+        int[][] prerequisites = {{2, 0}, {3, 1}};
+        System.out.println(canFinish(numCourses, prerequisites)); // Output: true
 
         int numCourses2 = 2;
         int[][] prerequisites2 = {{1, 0}};
